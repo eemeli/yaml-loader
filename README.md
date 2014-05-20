@@ -1,4 +1,4 @@
-yml-loader
+yaml-loader
 ==========
 
-YML loader for webpack (converts YML to JSON)
+YAML loader for webpack (converts YAML to JSON)
