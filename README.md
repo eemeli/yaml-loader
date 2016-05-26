@@ -15,6 +15,22 @@ var json = require("json!yaml!./file.yml");
 // => returns file.yml as javascript object
 ```
 
+## Configure
+
+``` javascript
+
+// webpack.config.js
+
+var yamlinc = require("yaml-include");
+
+module.exports = {
+  // ... snip
+  yaml: { // All keys in yaml will be passed to js-yaml as options
+    schema: yamlinc.YAML_INCLUDE_SCHEMA
+  }
+};
+```
+
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
