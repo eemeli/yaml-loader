@@ -1,6 +1,6 @@
 # yaml-loader for webpack
 
-YAML loader for [webpack](http://webpack.github.io/). Converts YAML to JSON.
+YAML loader for [webpack](http://webpack.github.io/). Converts YAML to JSON. You should chain it with [json-loader](https://github.com/webpack/json-loader).
 
 ## Installation
 
@@ -11,7 +11,7 @@ YAML loader for [webpack](http://webpack.github.io/). Converts YAML to JSON.
 [Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
 
 ``` javascript
-var json = require("yaml!./file.yml");
+var json = require("json!yaml!./file.yml");
 // => returns file.yml as javascript object
 ```
 
