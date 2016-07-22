@@ -35,7 +35,7 @@ module: {
 and then
 
 ```js
-// applicatin.js
+// application.js
 const actualFilename = require(`file?name=[name].json!./../data/${file}.yaml`);
 window.fetch(actualFilename).then(res => {
   // ...
