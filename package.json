@@ -18,8 +18,15 @@
   "bugs": {
     "url": "https://github.com/okonet/yaml-loader/issues"
   },
+  "scripts": {
+    "test": "mocha"
+  },
   "homepage": "https://github.com/okonet/yaml-loader",
   "dependencies": {
-    "js-yaml": "^3.5.2"
+    "js-yaml": "^3.5.2",
+    "loader-utils": "^0.2.15"
+  },
+  "devDependencies": {
+    "mocha": "^3.0.2"
   }
 }
