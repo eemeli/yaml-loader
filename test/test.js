@@ -14,4 +14,18 @@ describe('yaml-loader', function() {
     assert.equal(yamlLoader.call(context, ("---\nhello: world\nhello: 2")), null);
     assert.equal(called, 1);
   });
+
+  it('return a part of the yaml', function() {
+    var context = {
+      query: '?namespace=hello'
+    };
+    assert.equal(yamlLoader.call(context, "---\nhello:\n  world: plop"), '{\n\t"world": "plop"\n}');
+  });
+
+  it('return a sub-part of the yaml', function() {
+    var context = {
+      query: '?namespace=hello.world'
+    };
+    assert.equal(yamlLoader.call(context, "---\nhello:\n  world: plop"), '"plop"');
+  });
 });

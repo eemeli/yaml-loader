@@ -42,6 +42,24 @@ window.fetch(actualFilename).then(res => {
 });
 ```
 
+You can also returns only a part of the yaml file. For example with this yaml file:
+
+```yaml
+---
+config:
+  js:
+    key: test
+hello: world
+```
+
+If you only want the *config.js* part, you can use the param namespace:
+
+```js
+let config  = require("!json!yaml?namespace=config.js!my_file.yaml");
+```
+
+The namespace param is a serie of keys, dot separated.
+
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
