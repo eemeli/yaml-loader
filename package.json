@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/okonet/yaml-loader",
   "dependencies": {
-    "js-yaml": "^3.5.2"
+    "js-yaml": "^3.7.0"
   }
 }
