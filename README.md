@@ -13,7 +13,7 @@ YAML loader for [webpack](http://webpack.github.io/). Converts YAML to a valid J
 Simplest case would be:
 
 ``` javascript
-var json = require("json!yaml!./file.yml");
+var json = require("json-loader!yaml-loader!./file.yml");
 // => returns file.yml as javascript object
 ```
 
