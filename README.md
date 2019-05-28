@@ -24,7 +24,7 @@ This loader is also useful for getting a valid JSON from YML. For example:
 module: {
   loaders: [
     {
-      test: /\.yaml$/,
+      test: /\.ya?ml$/,
       include: path.resolve('data'),
       loader: 'yaml',
     },
