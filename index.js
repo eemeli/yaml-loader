@@ -12,5 +12,5 @@ module.exports = function (source) {
       return acc[name];
     }, res);
   }
-  return JSON.stringify(res, undefined, '\t');
+  return JSON.stringify(res);
 };
