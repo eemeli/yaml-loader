@@ -1,32 +1,28 @@
-var assert = require('assert');
-var yamlLoader = require('../');
+const loader = require('../');
 
-describe('yaml-loader', function() {
-  it('return stringify version of the yaml file', function() {
-    assert.equal(yamlLoader("---\nhello: world"), '{\n\t"hello": "world"\n}');
-  });
+test('return stringify version of the yaml file', () => {
+  const res = loader("---\nhello: world")
+  expect(res).toBe('{\n\t"hello": "world"\n}');
+});
 
-  it('throw error if there is a parse error', function() {
-    var msg = null;
-    try {
-      yamlLoader("---\nhello: world\nhello: 2");
-    } catch (error) {
-      msg = error.message
-    }
-    assert.equal(msg, 'Map keys must be unique; "hello" is repeated');
-  });
+test('throw error if there is a parse error', () => {
+  let msg = null;
+  try {
+    loader("---\nhello: world\nhello: 2");
+  } catch (error) {
+    msg = error.message
+  }
+  expect(msg).toBe('Map keys must be unique; "hello" is repeated');
+});
 
-  it('return a part of the yaml', function() {
-    var context = {
-      query: '?namespace=hello'
-    };
-    assert.equal(yamlLoader.call(context, "---\nhello:\n  world: plop"), '{\n\t"world": "plop"\n}');
-  });
+test('return a part of the yaml', () => {
+  const ctx = { query: '?namespace=hello' };
+  const res = loader.call(ctx, "---\nhello:\n  world: plop")
+  expect(res).toBe('{\n\t"world": "plop"\n}');
+});
 
-  it('return a sub-part of the yaml', function() {
-    var context = {
-      query: '?namespace=hello.world'
-    };
-    assert.equal(yamlLoader.call(context, "---\nhello:\n  world: plop"), '"plop"');
-  });
+test('return a sub-part of the yaml', () => {
+  const ctx = { query: '?namespace=hello.world' };
+  const res = loader.call(ctx, "---\nhello:\n  world: plop")
+  expect(res).toBe('"plop"');
 });
