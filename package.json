@@ -19,7 +19,7 @@
     "url": "https://github.com/okonet/yaml-loader/issues"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "jest"
   },
   "homepage": "https://github.com/okonet/yaml-loader",
   "dependencies": {
@@ -27,6 +27,6 @@
     "yaml": "^1.8.2"
   },
   "devDependencies": {
-    "mocha": "^7.1.0"
+    "jest": "^25.1.0"
   }
 }
