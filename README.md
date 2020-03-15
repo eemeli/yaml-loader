@@ -44,7 +44,7 @@ file.hello === 'world'
 
 ## Options
 
-The loader supports `namespace` as a query option, which allows for exposing a sub-tree of the source document:
+ In addition to all [`yaml` options](https://eemeli.org/yaml/#options), the loader supports `namespace`, which allows for exposing a sub-tree of the source document:
 
 ```js
 import jsCfg from './file.yaml?namespace=config.js'

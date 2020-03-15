@@ -12,7 +12,7 @@ test('throw error if there is a parse error', () => {
   } catch (error) {
     msg = error.message
   }
-  expect(msg).toBe('Map keys must be unique; "hello" is repeated');
+  expect(msg).toMatch(/^Map keys must be unique; "hello" is repeated/);
 });
 
 test('return a part of the yaml', () => {
