@@ -4,7 +4,7 @@ var YAML = require('yaml');
 module.exports = function (source) {
   this.cacheable && this.cacheable();
   var res = YAML.parse(source);
-  var options = loaderUtils.parseQuery(this.query);
+  var options = loaderUtils.getOptions(this) || {};
   if (options.namespace) {
     res = options.namespace.split('.').reduce(function(acc, name) {
       return acc[name];
