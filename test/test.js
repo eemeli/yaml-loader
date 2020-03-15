@@ -6,13 +6,14 @@ describe('yaml-loader', function() {
     assert.equal(yamlLoader("---\nhello: world"), '{\n\t"hello": "world"\n}');
   });
 
-  it('emit error if there is a parse error', function() {
-    var called = 0;
-    var context = {emitError: function() {
-      called++;
-    }};
-    assert.equal(yamlLoader.call(context, ("---\nhello: world\nhello: 2")), null);
-    assert.equal(called, 1);
+  it('throw error if there is a parse error', function() {
+    var msg = null;
+    try {
+      yamlLoader("---\nhello: world\nhello: 2");
+    } catch (error) {
+      msg = error.message
+    }
+    assert.equal(msg, 'Map keys must be unique; "hello" is repeated');
   });
 
   it('return a part of the yaml', function() {
