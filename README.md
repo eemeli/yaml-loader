@@ -1,50 +1,32 @@
-# yaml-loader for webpack
+# yaml-loader for Webpack
 
-YAML loader for [webpack](http://webpack.github.io/). Converts YAML to a valid JSON. If you want a JS Object, chain it with [json-loader](https://github.com/webpack/json-loader).
+YAML loader for [Webpack](https://webpack.js.org/). Allows importing YAML files as JS objects. Uses [`yaml`](https://www.npmjs.com/package/yaml) internally.
 
 ## Installation
 
-`npm install yaml-loader`
+```sh
+npm install --save-dev yaml-loader
+```
 
 ## Usage
 
-[Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
-
-Simplest case would be:
-
-``` javascript
-var json = require("json-loader!yaml-loader!./file.yml");
-// => returns file.yml as javascript object
-```
-
-This loader is also useful for getting a valid JSON from YML. For example:
-
 ```js
 // webpack.config.js
-module: {
-  loaders: [
-    {
-      test: /\.ya?ml$/,
-      include: path.resolve('data'),
-      loader: 'yaml-loader',
-    },
-  ],
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.ya?ml$/,
+        type: 'json', // Required by Webpack v4
+        use: 'yaml-loader'
+      }
+    ]
+  }
 }
 ```
 
-and then
-
-```js
-// application.js
-const actualFilename = require(`file?name=[name].json!./../data/${file}.yaml`);
-window.fetch(actualFilename).then(res => {
-  // ...
-});
-```
-
-You can also returns only a part of the yaml file. For example with this yaml file:
-
 ```yaml
+# file.yaml
 ---
 config:
   js:
@@ -52,15 +34,28 @@ config:
 hello: world
 ```
 
-If you only want the *config.js* part, you can use the param namespace:
 
 ```js
-let config  = require("!json!yaml?namespace=config.js!my_file.yaml");
+// application.js
+import file from './file.yaml';
+
+file.hello === 'world'
 ```
 
-The namespace param is a serie of keys, dot separated.
+## Options
+
+The loader supports `namespace` as a query option, which allows for exposing a sub-tree of the source document:
+
+```js
+import jsCfg from './file.yaml?namespace=config.js'
+
+jsCfg.key === 'test'
+```
+
+The `namespace` should be a series of keys, dot separated. Note that any `options` object in your `webpack.config.js` rule will be superseded by a `?query`.
+
 
 ## License
 
-MIT (http://www.opensource.org/licenses/mit-license.php)
+[MIT](http://www.opensource.org/licenses/mit-license.php)
 
