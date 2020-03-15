@@ -34,10 +34,9 @@ config:
 hello: world
 ```
 
-
 ```js
 // application.js
-import file from './file.yaml';
+import file from './file.yaml'
 
 file.hello === 'world'
 ```
@@ -88,8 +87,6 @@ jsCfg.key === 'test'
 
 The `namespace` should be a series of keys, dot separated. Note that any `options` object in your `webpack.config.js` rule will be superseded by a `?query`.
 
-
 ## License
 
 [MIT](http://www.opensource.org/licenses/mit-license.php)
-
