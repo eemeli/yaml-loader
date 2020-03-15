@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/okonet/yaml-loader",
   "dependencies": {
-    "js-yaml": "^3.5.2"
+    "yaml": "^1.8.2"
   },
   "devDependencies": {
     "mocha": "^3.0.2"

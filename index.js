@@ -1,9 +1,9 @@
-var yaml = require('js-yaml');
+var YAML = require('yaml');
 
 module.exports = function (source) {
   this.cacheable && this.cacheable();
   try {
-    var res = yaml.safeLoad(source);
+    var res = YAML.parse(source);
     return JSON.stringify(res, undefined, '\t');
   }
   catch (err) {
