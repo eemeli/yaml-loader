@@ -26,7 +26,7 @@ module: {
     {
       test: /\.ya?ml$/,
       include: path.resolve('data'),
-      loader: 'yaml',
+      loader: 'yaml-loader',
     },
   ],
 }
