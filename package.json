@@ -1,11 +1,11 @@
 {
   "name": "yaml-loader",
   "version": "0.5.0",
-  "description": "YAML loader for webpack (converts YAML to JSON)",
+  "description": "YAML loader for Webpack",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/okonet/yaml-loader.git"
+    "url": "https://github.com/eemeli/yaml-loader.git"
   },
   "keywords": [
     "yaml",
@@ -13,20 +13,26 @@
     "loader",
     "json"
   ],
-  "author": "Andrey Okonetchnikov <andrey@okonet.ru>",
+  "contributors": [
+    "Andrey Okonetchnikov <andrey@okonet.ru>",
+    "Eemeli Aro <eemeli@gmail.com>"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/okonet/yaml-loader/issues"
+    "url": "https://github.com/eemeli/yaml-loader/issues"
   },
   "scripts": {
     "test": "jest"
   },
-  "homepage": "https://github.com/okonet/yaml-loader",
+  "homepage": "https://github.com/eemeli/yaml-loader",
   "dependencies": {
     "loader-utils": "^1.4.0",
     "yaml": "^1.8.2"
   },
   "devDependencies": {
     "jest": "^25.1.0"
+  },
+  "engines": {
+    "node": ">= 6"
   }
 }
