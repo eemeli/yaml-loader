@@ -26,3 +26,16 @@ test('return a sub-part of the yaml', () => {
   const res = loader.call(ctx, "---\nhello:\n  world: plop")
   expect(res).toBe('"plop"');
 });
+
+test('with asStream, parse multiple documents', () => {
+  const ctx = { query: { asStream: true } };
+  const src = "hello: world\n---\nsecond: document\n"
+  const res = loader.call(ctx, src)
+  expect(res).toBe('[{"hello":"world"},{"second":"document"}]')
+})
+
+test('without asStream, fail to parse multiple documents', () => {
+  const ctx = { query: { asStream: false } };
+  const src = "hello: world\n---\nsecond: document\n"
+  expect(() => loader.call(ctx, src)).toThrow(/^Source contains multiple documents/)
+})
