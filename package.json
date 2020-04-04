@@ -27,7 +27,7 @@
   ],
   "scripts": {
     "prettier": "prettier --write '**/*.{js,md}'",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "prettier": {
     "semi": false,
