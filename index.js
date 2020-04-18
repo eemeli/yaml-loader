@@ -1,5 +1,6 @@
-var loaderUtils = require('loader-utils')
-var YAML = require('yaml')
+const loaderUtils = require('loader-utils')
+const { stringify } = require('javascript-stringify')
+const YAML = require('yaml')
 
 module.exports = function yamlLoader(src) {
   const { asJSON, asStream, namespace, ...options } = Object.assign(
@@ -17,14 +18,14 @@ module.exports = function yamlLoader(src) {
       res.push(doc.toJSON())
     }
   } else {
-    res = YAML.parse(src, options)
-    if (namespace) {
-      res = namespace.split('.').reduce(function(acc, name) {
-        return acc[name]
-      }, res)
-    }
+    const doc = YAML.parseDocument(src, options)
+    for (const warn of doc.warnings) this.emitWarning(warn)
+    for (const err of doc.errors) throw err
+    if (namespace) doc.contents = doc.getIn(namespace.split('.'))
+    res = doc.toJSON()
   }
 
-  const json = JSON.stringify(res)
-  return asJSON ? json : `export default ${json};`
+  if (asJSON) return JSON.stringify(res)
+  const str = stringify(res)
+  return `export default ${str};`
 }
