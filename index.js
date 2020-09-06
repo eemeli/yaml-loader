@@ -1,4 +1,4 @@
-const loaderUtils = require('loader-utils')
+const { getOptions } = require('loader-utils')
 const { stringify } = require('javascript-stringify')
 const YAML = require('yaml')
 
@@ -7,7 +7,7 @@ const makeIdIterator = (prefix = 'v', i = 1) => ({ next: () => prefix + i++ })
 module.exports = function yamlLoader(src) {
   const { asJSON, asStream, namespace, ...options } = Object.assign(
     { prettyErrors: true },
-    loaderUtils.getOptions(this)
+    getOptions(this)
   )
 
   // keep track of repeated object references
@@ -17,7 +17,7 @@ module.exports = function yamlLoader(src) {
     if (ref && typeof ref === 'object' && count > 1)
       refs.set(ref, { id: idIter.next(), seen: false })
   }
-  const stringifyWithRefs = value =>
+  const stringifyWithRefs = (value) =>
     stringify(value, (value, space, next) => {
       const v = refs.get(value)
       if (v) {

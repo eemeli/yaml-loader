@@ -11,7 +11,9 @@ describe('aliased objects', () => {
     const ctx = { query: { asStream: true } }
     const src = 'foo: &foo [foo]\nbar: *foo\n---\nfoo: &foo [foo]\nbar: *foo'
     const res = loader.call(ctx, src)
-    expect(res).toBe("var v1 = ['foo'];\nvar v2 = ['foo'];\nexport default [{foo:v1,bar:v1},{foo:v2,bar:v2}];")
+    expect(res).toBe(
+      "var v1 = ['foo'];\nvar v2 = ['foo'];\nexport default [{foo:v1,bar:v1},{foo:v2,bar:v2}];"
+    )
   })
 })
 
