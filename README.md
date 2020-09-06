@@ -17,7 +17,6 @@ module.exports = {
     rules: [
       {
         test: /\.ya?ml$/,
-        type: 'json', // Required by Webpack v4
         use: 'yaml-loader'
       }
     ]
@@ -44,6 +43,10 @@ file.hello === 'world'
 ## Options
 
 In addition to all [`yaml` options](https://eemeli.org/yaml/#options), the loader supports the following additional options:
+
+### `asJSON`
+
+If enabled, the loader output is stringified JSON rather than stringified JavaScript. For Webpack v4, you'll need to set the rule to have `type: "json"`. Also useful for chaining with other loaders that expect JSON input.
 
 ### `asStream`
 
