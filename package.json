@@ -36,8 +36,8 @@
   },
   "dependencies": {
     "javascript-stringify": "^2.0.1",
-    "loader-utils": "^2.0.0",
-    "yaml": "^1.10.0"
+    "js-yaml": "^4.0.0",
+    "loader-utils": "^2.0.0"
   },
   "devDependencies": {
     "jest": "^26.4.2",

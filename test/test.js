@@ -5,14 +5,14 @@ describe('aliased objects', () => {
     const ctx = {}
     const src = 'foo: &foo [&val foo]\nbar: *foo'
     const res = loader.call(ctx, src)
-    expect(res).toBe("var v1 = ['foo'];\nexport default {foo:v1,bar:v1};")
+    expect(res).toBe("export default {foo:['foo'],bar:['foo']};")
   })
   test('document stream', () => {
     const ctx = { query: { asStream: true } }
     const src = 'foo: &foo [foo]\nbar: *foo\n---\nfoo: &foo [foo]\nbar: *foo'
     const res = loader.call(ctx, src)
     expect(res).toBe(
-      "var v1 = ['foo'];\nvar v2 = ['foo'];\nexport default [{foo:v1,bar:v1},{foo:v2,bar:v2}];"
+      "export default [{foo:['foo'],bar:['foo']},{foo:['foo'],bar:['foo']}];"
     )
   })
 })
@@ -29,22 +29,15 @@ describe('options.asJSON', () => {
     const ctx = { query: { asJSON: true } }
     const src = '---\nhello: world\nhello: 2'
     expect(() => loader.call(ctx, src)).toThrow(
-      /^Map keys must be unique; "hello" is repeated/
+      /^duplicated mapping key/
     )
   })
-})
 
-describe('options.namespace', () => {
-  test('return a part of the yaml', () => {
-    const ctx = { query: '?namespace=hello' }
-    const res = loader.call(ctx, '---\nhello:\n  world: plop')
-    expect(res).toBe("export default {world:'plop'};")
-  })
-
-  test('return a sub-part of the yaml', () => {
-    const ctx = { query: '?namespace=hello.world' }
-    const res = loader.call(ctx, '---\nhello:\n  world: plop')
-    expect(res).toBe("export default 'plop';")
+  test('parse <<: syntax', () => {
+    const ctx = { query: { asJSON: true } }
+    const src = '---\nhello: world\n<<:\n  test: value'
+    const res = loader.call(ctx, src)
+    expect(res).toBe('{"hello":"world","test":"value"}')
   })
 })
 
@@ -60,7 +53,7 @@ describe('options.asStream', () => {
     const ctx = { query: { asStream: false } }
     const src = 'hello: world\n---\nsecond: document\n'
     expect(() => loader.call(ctx, src)).toThrow(
-      /^Source contains multiple documents/
+      /^expected a single document in the stream, but found more/
     )
   })
 })

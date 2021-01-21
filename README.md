@@ -1,6 +1,6 @@
 # yaml-loader for Webpack
 
-YAML loader for [Webpack](https://webpack.js.org/). Allows importing YAML files as JS objects. Uses [`yaml`](https://www.npmjs.com/package/yaml) internally.
+YAML loader for [Webpack](https://webpack.js.org/). Allows importing YAML files as JS objects. Uses [`js-yaml`](https://www.npmjs.com/package/js-yaml) internally.
 
 ## Installation
 
@@ -42,11 +42,12 @@ file.hello === 'world'
 
 ## Options
 
-In addition to all [`yaml` options](https://eemeli.org/yaml/#options), the loader supports the following additional options:
+In addition to all [`js-yaml` options](https://www.npmjs.com/package/js-yaml#API), the loader supports the following additional options:
 
 ### `asJSON`
 
 If enabled, the loader output is stringified JSON rather than stringified JavaScript. For Webpack v4, you'll need to set the rule to have `type: "json"`. Also useful for chaining with other loaders that expect JSON input.
+
 
 ### `asStream`
 
@@ -77,18 +78,6 @@ module.exports = {
 ```
 
 Then, importing `./foo.yaml` will expect it to contain only one document, but `./bar.yaml?stream` may contain multiple documents.
-
-### `namespace`
-
-Allows for exposing a sub-tree of the source document:
-
-```js
-import jsCfg from './file.yaml?namespace=config.js'
-
-jsCfg.key === 'test'
-```
-
-The `namespace` should be a series of keys, dot separated. Note that any `options` object in your `webpack.config.js` rule will be superseded by a `?query`.
 
 ## License
 
