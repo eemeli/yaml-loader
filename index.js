@@ -27,6 +27,12 @@ module.exports = function yamlLoader(src) {
       return next(value)
     })
 
+  const jsOpt = Object.assign({}, options, { onAnchor: addRef })
+  if (asJSON) {
+    jsOpt.json = true
+    jsOpt.mapAsMap = false
+  }
+
   let res
   if (asStream) {
     const stream = YAML.parseAllDocuments(src, options)
@@ -34,14 +40,14 @@ module.exports = function yamlLoader(src) {
     for (const doc of stream) {
       for (const warn of doc.warnings) this.emitWarning(warn)
       for (const err of doc.errors) throw err
-      res.push(doc.toJSON(null, addRef))
+      res.push(doc.toJS(jsOpt))
     }
   } else {
     const doc = YAML.parseDocument(src, options)
     for (const warn of doc.warnings) this.emitWarning(warn)
     for (const err of doc.errors) throw err
     if (namespace) doc.contents = doc.getIn(namespace.split('.'))
-    res = doc.toJSON(null, addRef)
+    res = doc.toJS(jsOpt)
   }
 
   if (asJSON) return JSON.stringify(res)
