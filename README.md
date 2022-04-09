@@ -42,7 +42,8 @@ file.hello === 'world'
 
 ## Options
 
-In addition to all [`yaml` options](https://eemeli.org/yaml/#options), the loader supports the following additional options:
+In addition to all [`yaml` options](https://eemeli.org/yaml/#options) used by its parsing methods,
+the loader supports the following additional options:
 
 ### `asJSON`
 

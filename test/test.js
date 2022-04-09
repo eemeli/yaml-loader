@@ -28,9 +28,7 @@ describe('options.asJSON', () => {
   test('throw error if there is a parse error', () => {
     const ctx = { query: { asJSON: true } }
     const src = '---\nhello: world\nhello: 2'
-    expect(() => loader.call(ctx, src)).toThrow(
-      /^Map keys must be unique; "hello" is repeated/
-    )
+    expect(() => loader.call(ctx, src)).toThrow(/Map keys must be unique/)
   })
 })
 
