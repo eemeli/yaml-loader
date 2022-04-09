@@ -7,6 +7,7 @@ describe('aliased objects', () => {
     const res = loader.call(ctx, src)
     expect(res).toBe("var v1 = ['foo'];\nexport default {foo:v1,bar:v1};")
   })
+
   test('document stream', () => {
     const ctx = { query: { asStream: true } }
     const src = 'foo: &foo [foo]\nbar: *foo\n---\nfoo: &foo [foo]\nbar: *foo'
@@ -59,6 +60,22 @@ describe('options.asStream', () => {
     const src = 'hello: world\n---\nsecond: document\n'
     expect(() => loader.call(ctx, src)).toThrow(
       /^Source contains multiple documents/
+    )
+  })
+})
+
+describe('yaml options', () => {
+  test('options.intAsBigInt', () => {
+    const ctx = { query: { intAsBigInt: true } }
+    const res = loader.call(ctx, 'answer: 42')
+    expect(res).toBe("export default {answer:BigInt('42')};")
+  })
+
+  test('options.mapAsMap', () => {
+    const ctx = { query: { mapAsMap: true } }
+    const res = loader.call(ctx, '---\nhello:\n  world: plop')
+    expect(res).toBe(
+      "export default new Map([['hello',new Map([['world','plop']])]]);"
     )
   })
 })
