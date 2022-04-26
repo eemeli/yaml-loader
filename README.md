@@ -62,14 +62,13 @@ module.exports = {
     rules: [
       {
         test: /\.ya?ml$/,
-        type: 'json', // Required by Webpack v4
         oneOf: [
           {
             resourceQuery: /stream/,
             options: { asStream: true },
-            use: 'yaml-loader'
+            loader: 'yaml-loader'
           },
-          { use: 'yaml-loader' }
+          { loader: 'yaml-loader' }
         ]
       }
     ]
