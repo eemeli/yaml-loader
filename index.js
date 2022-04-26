@@ -45,7 +45,15 @@ module.exports = function yamlLoader(src) {
   } else {
     const doc = YAML.parseDocument(src, options)
     for (const warn of doc.warnings) this.emitWarning(warn)
-    for (const err of doc.errors) throw err
+    for (const err of doc.errors) {
+      if (err.message.includes('Source contains multiple documents')) {
+        err.message = err.message.replace(
+          'YAML.parseAllDocuments()',
+          'yaml-loader asStream option'
+        )
+      }
+      throw err
+    }
     if (namespace) doc.contents = doc.getIn(namespace.split('.'))
     res = doc.toJS(jsOpt)
   }

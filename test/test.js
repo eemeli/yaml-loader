@@ -58,9 +58,7 @@ describe('options.asStream', () => {
   test('without asStream, fail to parse multiple documents', () => {
     const ctx = { query: { asStream: false } }
     const src = 'hello: world\n---\nsecond: document\n'
-    expect(() => loader.call(ctx, src)).toThrow(
-      /^Source contains multiple documents/
-    )
+    expect(() => loader.call(ctx, src)).toThrow(/yaml-loader asStream option/)
   })
 })
 
