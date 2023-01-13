@@ -41,7 +41,10 @@
   },
   "devDependencies": {
     "jest": "^28.0.0",
-    "prettier": "^2.1.1"
+    "memfs": "^3.4.13",
+    "prettier": "^2.1.1",
+    "unionfs": "^4.4.0",
+    "webpack": "^5.75.0"
   },
   "engines": {
     "node": ">= 12.13"
