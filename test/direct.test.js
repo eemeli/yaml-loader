@@ -1,4 +1,4 @@
-const loader = require('../')
+const loader = require('..')
 
 describe('aliased objects', () => {
   test('single document', () => {
