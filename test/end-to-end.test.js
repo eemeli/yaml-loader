@@ -131,4 +131,41 @@ spy(file[0].hello)
       }
     })
   })
+
+  test('namespace query', (done) => {
+    const input = Volume.fromJSON({
+      '/file.cjs': `\
+const file = require('./file.yaml?namespace=hello')
+spy(file.default)
+`,
+      '/file.mjs': `\
+import file from './file.yaml?namespace=hello'
+spy(file)
+`,
+      '/file.yaml': `hello: world`
+    })
+
+    const compiler = webpack({
+      entry: { cjs: '/file.cjs', mjs: '/file.mjs' },
+      output: { path: '/dist' },
+      module: { rules: [{ test: /\.ya?ml$/, loader: './index.js' }] }
+    })
+    compiler.inputFileSystem = new Union().use(input).use(fs)
+    compiler.outputFileSystem = new Volume()
+
+    compiler.run((err, stats) => {
+      try {
+        if (err) throw err
+        if (stats.hasErrors()) throw stats.compilation.errors
+        const spy = jest.fn()
+        const output = compiler.outputFileSystem.toJSON()
+        new Function('spy', output['/dist/cjs.js'])(spy)
+        new Function('spy', output['/dist/mjs.js'])(spy)
+        expect(spy.mock.calls).toEqual([['world'], ['world']])
+        done()
+      } catch (err) {
+        done(err)
+      }
+    })
+  })
 })
