@@ -5,10 +5,14 @@ const YAML = require('yaml')
 const makeIdIterator = (prefix = 'v', i = 1) => ({ next: () => prefix + i++ })
 
 module.exports = function yamlLoader(src) {
-  const { asJSON, asStream, namespace, ...options } = Object.assign(
+  const { asJSON, asStream, ...options } = Object.assign(
     { prettyErrors: true },
-    getOptions(this)
+    this.getOptions?.() ?? getOptions(this)
   )
+  const namespace =
+    (this.resourceQuery &&
+      new URLSearchParams(this.resourceQuery).get('namespace')) ||
+    options.namespace
 
   // keep track of repeated object references
   const refs = new Map()
@@ -27,7 +31,10 @@ module.exports = function yamlLoader(src) {
       return next(value)
     })
 
-  const jsOpt = Object.assign({}, options, { onAnchor: addRef })
+  const jsOpt = Object.assign({}, options, {
+    namespace: undefined,
+    onAnchor: addRef
+  })
   if (asJSON) {
     jsOpt.json = true
     jsOpt.mapAsMap = false
