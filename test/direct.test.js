@@ -1,4 +1,5 @@
-const loader = require('..')
+import { describe, expect, test } from 'vitest'
+import loader from '../index.js'
 
 describe('aliased objects', () => {
   test('single document', () => {

@@ -1,7 +1,8 @@
-const fs = require('fs')
-const { Volume } = require('memfs')
-const { Union } = require('unionfs')
-const webpack = require('webpack')
+import fs from 'fs'
+import { Volume } from 'memfs'
+import { Union } from 'unionfs'
+import { describe, expect, test } from 'vitest'
+import webpack from 'webpack'
 
 describe('end-to-end', (done) => {
   test('default options', (done) => {
