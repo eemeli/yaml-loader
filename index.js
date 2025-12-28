@@ -1,4 +1,3 @@
-const { getOptions } = require('loader-utils')
 const { stringify } = require('javascript-stringify')
 const YAML = require('yaml')
 
@@ -7,7 +6,7 @@ const makeIdIterator = (prefix = 'v', i = 1) => ({ next: () => prefix + i++ })
 module.exports = function yamlLoader(src) {
   const { asJSON, asStream, ...options } = Object.assign(
     { prettyErrors: true },
-    this.getOptions?.() ?? getOptions(this)
+    this.getOptions()
   )
   const namespace =
     (this.resourceQuery &&

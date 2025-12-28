@@ -47,7 +47,8 @@ the loader supports the following additional options:
 
 ### `asJSON`
 
-If enabled, the loader output is stringified JSON rather than stringified JavaScript. For Webpack v4, you'll need to set the rule to have `type: "json"`. Also useful for chaining with other loaders that expect JSON input.
+If enabled, the loader output is stringified JSON rather than stringified JavaScript.
+Also useful for chaining with other loaders that expect JSON input.
 
 ### `asStream`
 
