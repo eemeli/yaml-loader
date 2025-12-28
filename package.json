@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@vitest/coverage-v8": "^4.0.16",
-    "memfs": "^3.4.13",
+    "memfs": "^4.51.1",
     "prettier": "^3.7.4",
     "unionfs": "^4.4.0",
     "vitest": "^4.0.16",
