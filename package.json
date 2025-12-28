@@ -36,7 +36,6 @@
   },
   "dependencies": {
     "javascript-stringify": "^2.0.1",
-    "loader-utils": "^2.0.0",
     "yaml": "^2.0.0"
   },
   "devDependencies": {
