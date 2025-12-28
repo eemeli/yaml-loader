@@ -26,7 +26,7 @@
     "index.js"
   ],
   "scripts": {
-    "prettier": "prettier --ignore-path .gitignore --write .",
+    "prettier": "prettier --write .",
     "test": "jest --coverage"
   },
   "prettier": {
@@ -41,7 +41,7 @@
   "devDependencies": {
     "jest": "^28.0.0",
     "memfs": "^3.4.13",
-    "prettier": "^2.1.1",
+    "prettier": "^3.7.4",
     "unionfs": "^4.4.0",
     "webpack": "^5.75.0"
   },
